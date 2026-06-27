@@ -1,459 +1,1138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Nur Nabihah · Mobile e-Portfolio</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nur Nabihah | MyKerja e-Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      background: #f4f9fc; /* soft blue-white base, matches SDG blue/green vibe */
-      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      color: #023b4a;
-      line-height: 1.5;
-      padding-top: 68px; /* sticky nav height */
-    }
+        :root {
+            --primary: #6C56D9;
+            --primary-dark: #4B37B8;
+            --secondary: #8B7BFF;
+            --bg1: #EEE8FF;
+            --bg2: #E9F1FF;
+            --bg3: #FFFFFF;
+            --card: #F8F5FF;
+            --text: #2D2755;
+            --text-light: #67628A;
+            --shadow: 0 12px 30px rgba(95, 78, 190, .12);
+        }
 
-    /* sticky nav – inspired by MyKerja top bar */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #0a3140; /* deep teal-blue, similar to MyKerja header */
-      backdrop-filter: blur(2px);
-      box-shadow: 0 4px 12px rgba(0,40,50,0.2);
-      z-index: 999;
-      padding: 0 1.2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 68px;
-      border-bottom: 2px solid #3d9c9c;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg,
+                    #EEE8FF 0%,
+                    #E8F0FF 28%,
+                    #FFFFFF 60%,
+                    #FFFFFF 100%);
+            color: var(--text);
+            overflow-x: hidden;
+        }
 
-    .nav-brand {
-      color: white;
-      font-weight: 600;
-      font-size: 1.3rem;
-      letter-spacing: -0.3px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        img {
+            max-width: 100%;
+            display: block;
+        }
 
-    .nav-brand small {
-      font-weight: 300;
-      font-size: 0.85rem;
-      opacity: 0.8;
-      margin-left: 4px;
-    }
+        a {
+            text-decoration: none;
+        }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem 1.2rem;
-      align-items: center;
-    }
+        section {
+            padding: 90px 8%;
+            scroll-margin-top: 90px;
+        }
 
-    .nav-links a {
-      color: #e0f2f5;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.95rem;
-      padding: 4px 2px;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
-      letter-spacing: 0.2px;
-    }
+        .container {
+            max-width: 1250px;
+            margin: auto;
+        }
 
-    .nav-links a:hover {
-      border-bottom-color: #8dd0d0;
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+        }
 
-    /* main container */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.2rem 2.5rem;
-    }
+        p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
 
-    /* sections */
-    section {
-      margin: 2.8rem 0 3.5rem;
-      scroll-margin-top: 80px;
-    }
+        /* ===== NAVBAR ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, .65);
+            backdrop-filter: blur(18px);
+            z-index: 999;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, .05);
+        }
 
-    .section-title {
-      font-size: 2rem;
-      font-weight: 600;
-      color: #135e6b;
-      border-left: 6px solid #3bac9c;
-      padding-left: 1rem;
-      margin-bottom: 1.8rem;
-      letter-spacing: -0.3px;
-    }
+        nav {
+            max-width: 1300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 30px;
+        }
 
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    .card {
-      background: white;
-      border-radius: 28px;
-      padding: 1.5rem 1.5rem 1.8rem;
-      box-shadow: 0 8px 24px rgba(0, 60, 70, 0.08);
-      transition: transform 0.15s ease, box-shadow 0.2s;
-      border: 1px solid rgba(60, 160, 160, 0.15);
-      display: flex;
-      flex-direction: column;
-    }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: white;
+        }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 16px 32px rgba(20, 100, 110, 0.12);
-      border-color: #9cd0d0;
-    }
+        .logo-text h2 {
+            font-size: 20px;
+        }
+        .logo-text p {
+            font-size: 13px;
+        }
 
-    .card h3 {
-      font-size: 1.4rem;
-      color: #0f4b57;
-      margin-bottom: 0.3rem;
-      font-weight: 600;
-    }
+        .menu {
+            display: flex;
+            gap: 35px;
+        }
 
-    .card .badge {
-      display: inline-block;
-      background: #d7edf0;
-      color: #13616b;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.2rem 0.8rem;
-      border-radius: 30px;
-      letter-spacing: 0.4px;
-      margin-bottom: 0.8rem;
-      align-self: flex-start;
-    }
+        .menu a {
+            font-weight: 500;
+            color: var(--text);
+            transition: .3s;
+            position: relative;
+        }
 
-    .card p {
-      color: #1f4e57;
-      margin: 0.4rem 0 0.6rem;
-      font-size: 0.95rem;
-    }
+        .menu a:hover {
+            color: var(--primary);
+        }
 
-    .card .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      border-radius: 18px;
-      overflow: hidden;
-      margin: 0.8rem 0 0.6rem;
-      background: #d2e6ea;
-    }
+        .menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: .3s;
+        }
 
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+        .menu a:hover::after {
+            width: 100%;
+        }
 
-    .reflection {
-      background: #eef8fa;
-      padding: 0.9rem 1rem;
-      border-radius: 18px;
-      font-size: 0.9rem;
-      margin: 0.6rem 0 0.8rem;
-      border-left: 4px solid #3bac9c;
-      color: #05444f;
-    }
+        /* ===== ACTIVE NAVBAR ===== */
+        .menu a.active {
+            color: var(--primary);
+        }
 
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: auto;
-      padding-top: 0.8rem;
-      align-items: center;
-    }
+        .menu a.active::after {
+            width: 100%;
+        }
 
-    .btn {
-      background: #14636e;
-      color: white;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: 0.2s;
-      box-shadow: 0 2px 6px rgba(0,60,70,0.15);
-      border: 1px solid #289b9b;
-    }
+        /* ===== HERO ===== */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 80px;
+        }
 
-    .btn-outline {
-      background: transparent;
-      color: #14636e;
-      border: 1.5px solid #14636e;
-      box-shadow: none;
-    }
+        .hero-card {
+            background: linear-gradient(135deg, #F1ECFF, #E8F2FF);
+            border-radius: 40px;
+            padding: 70px;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            align-items: center;
+            gap: 50px;
+        }
 
-    .btn-outline:hover {
-      background: #14636e;
-      color: white;
-    }
+        .hero small {
+            font-size: 15px;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
-    .btn:hover {
-      background: #0e525c;
-      transform: scale(0.97);
-    }
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.15;
+            margin-top: 15px;
+        }
 
-    .btn-github {
-      background: #1b2b34;
-      border-color: #1b2b34;
-    }
+        .hero h1 span {
+            color: var(--primary);
+        }
 
-    .btn-github:hover {
-      background: #0b1a22;
-    }
+        .hero p {
+            margin-top: 25px;
+            font-size: 17px;
+            max-width: 650px;
+        }
 
-    footer {
-      background: #0a3140;
-      color: #d4e9ed;
-      padding: 2.2rem 1.5rem;
-      border-radius: 40px 40px 0 0;
-      margin-top: 3.5rem;
-      text-align: center;
-      border-top: 2px solid #4da8a8;
-    }
+        .search-box {
+            margin-top: 35px;
+            background: white;
+            padding: 14px;
+            border-radius: 60px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+            flex-wrap: wrap;
+        }
 
-    footer .footer-content {
-      max-width: 700px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      font-size: 0.95rem;
-    }
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px;
+            font-family: Poppins;
+            font-size: 15px;
+            min-width: 180px;
+        }
 
-    footer strong {
-      color: #c4edf0;
-    }
+        .search-box button {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .3s;
+        }
 
-    .intro-box {
-      background: white;
-      border-radius: 32px;
-      padding: 1.8rem 2rem;
-      box-shadow: 0 4px 14px rgba(0,60,70,0.04);
-      border: 1px solid #bce0e0;
-      margin-bottom: 1.2rem;
-    }
+        .search-box button:hover {
+            background: var(--primary-dark);
+        }
 
-    .sdg-tag {
-      background: #03444f;
-      color: white;
-      border-radius: 50px;
-      padding: 0.2rem 1.4rem;
-      font-weight: 500;
-      display: inline-block;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      margin: 0.2rem 0 0.6rem;
-    }
+        .phone {
+            display: flex;
+            justify-content: center;
+        }
 
-    hr {
-      border: 1px solid #b1d7db;
-      margin: 1.8rem 0;
-    }
+        .phone img {
+            width: 290px;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .15);
+        }
 
-    .skill-tag {
-      display: inline-block;
-      background: #d2ecf0;
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: #04454f;
-      margin: 0.2rem 0.2rem;
-    }
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
 
-    .flex-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 0.8rem;
-      margin: 0.8rem 0;
-    }
+        .section-title h2 {
+            font-size: 42px;
+        }
+        .section-title p {
+            margin-top: 10px;
+        }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media (max-width: 680px) {
-      .two-col { grid-template-columns: 1fr; }
-      .nav-links { gap: 0.4rem 0.9rem; justify-content: center; }
-      nav { flex-direction: column; align-items: center; padding: 0.4rem 0.8rem; }
-      body { padding-top: 100px; }
-      .section-title { font-size: 1.7rem; }
-    }
-  </style>
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card);
+            border-radius: 30px;
+            padding: 28px;
+            box-shadow: var(--shadow);
+            transition: .35s;
+            /* ===== FLEX COLUMN UNTUK TOLAK BUTTON KE BAWAH ===== */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+
+        .poster {
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .poster img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: none;
+            border-radius: 18px;
+            margin-top: 18px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #E5DDFF;
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            align-self: flex-start;
+        }
+
+        /* ===== BADGE GROUP (untuk Technologies Used & Skills) ===== */
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 12px;
+            margin-bottom: 10px;
+        }
+
+        .badge-group .badge {
+            margin-bottom: 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            margin-left: 10px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== BUTTON GROUP (untuk Projects) ===== */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .btn-group .btn {
+            margin-top: 0;
+        }
+
+        /* ===== TOLAK SEMUA BUTTON KE BAWAH CARD ===== */
+        .card .btn,
+        .card .contact-btn {
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        /* ===== STUDENT PROFILE ===== */
+        .student-profile {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        /* ===== IMEJ: tiada border, saiz 170px ===== */
+        .student-profile img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: none;
+            box-shadow: none;
+            flex-shrink: 0;
+        }
+
+        .student-profile .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== CONTACT BUTTON (SAMA MACAM LEARN MORE) ===== */
+        .contact-btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            align-self: flex-start;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #372A76;
+            color: white;
+            padding: 45px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        footer p {
+            color: #ddd;
+            margin-top: 10px;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        #topBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            width: 55px;
+            height: 55px;
+            border: none;
+            border-radius: 50%;
+            background: #6C56D9;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+            transition: .3s;
+            z-index: 999;
+        }
+
+        #topBtn:hover {
+            background: #4B37B8;
+            transform: translateY(-4px);
+        }
+
+        /* ===== REVEAL ANIMATION ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:900px) {
+            .hero-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 40px;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .menu {
+                display: none;
+            }
+            .search-box {
+                flex-direction: column;
+                border-radius: 25px;
+            }
+            .phone img {
+                width: 240px;
+            }
+            section {
+                padding: 70px 25px;
+            }
+            .student-profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .student-profile img {
+                width: 180px;
+                height: 180px;
+            }
+            .student-profile .info .contact-btn {
+                align-self: center;
+            }
+            .card .btn,
+            .card .contact-btn {
+                align-self: center;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            .btn-group .btn-outline {
+                margin-left: 0;
+            }
+        }
+
+        /* ===== RESPONSIVE UNTUK TABLET KECIL ===== */
+        @media(max-width:600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .section-title h2 {
+                font-size: 30px;
+            }
+            .hero-card {
+                padding: 25px;
+            }
+            .student-profile img {
+                width: 150px;
+                height: 150px;
+            }
+            .btn,
+            .contact-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <!-- sticky nav -->
-  <nav>
-    <div class="nav-brand">
-      🌱 MyKerja<span style="font-weight:300;margin-left:6px;font-size:0.9rem;">· e-Portfolio</span>
-    </div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#labs">Labs</a>
-      <a href="#projects">Projects</a>
-      <a href="#reflection">Reflection</a>
-      <a href="#skills">Skills</a>
-      <a href="#resources">Resources</a>
-    </div>
-  </nav>
 
-  <div class="container">
-    <!-- HOME / intro -->
-    <section id="home">
-      <div class="intro-box">
-        <h1 style="font-size:2.3rem; color:#0b4857; margin-bottom:0.2rem;">Nur Nabihah Binti Alwi</h1>
-        <p style="font-size:1.1rem; color:#115f6b;"><strong>A210814</strong> · Bachelor of Information Technology · UKM</p>
-        <p style="color:#1c5a64; margin:0.5rem 0 0.2rem;">Instructor: Dr Rimaniza</p>
-        <div class="sdg-tag">🌍 SDG 1 – No Poverty</div>
-        <p style="margin:0.6rem 0 0.2rem; font-size:1rem;">This e-Portfolio documents my learning journey in Mobile Programming using Jetpack Compose. I developed <strong>MyKerja</strong>, a dual‑role job platform where Jobseekers search & apply, and Companies post vacancies – all in one app. Aligned with SDG 1 (No Poverty) by improving job accessibility and income stability.</p>
-        <p style="background:#e1f3f5; padding:0.4rem 1rem; border-radius:40px; display:inline-block; margin-top:0.6rem;">📱 MyKerja · jobseeker + company unified</p>
-      </div>
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="avatar">N</div>
+                <div class="logo-text">
+                    <h2>MyKerja</h2>
+                    <p>Welcome, Nur Nabihah</p>
+                </div>
+            </div>
+            <div class="menu">
+                <a href="#home">Home</a>
+                <a href="#labs">Labs</a>
+                <a href="#projects">Projects</a>
+                <a href="#reflection">Reflection</a>
+                <a href="#skills">Skills</a>
+                <a href="#resources">Resources</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-card">
+                <div>
+                    <small>Mobile Programming e-Portfolio</small>
+                    <h1>
+                        Building <span>MyKerja</span><br>
+                        for SDG 1: No Poverty
+                    </h1>
+                    <p>
+                        This e-Portfolio documents my learning journey in Mobile Programming using Jetpack Compose.
+                        Throughout this course, I developed <strong>MyKerja</strong>, a dual-role mobile application
+                        that connects job seekers and employers in a single integrated platform to improve access to
+                        employment opportunities.
+                    </p>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search Job Opportunities">
+                        <input type="text" placeholder="Company / Location">
+                        <button>Explore</button>
+                    </div>
+                </div>
+                <div class="phone">
+                    <img src="images/app-home.png" alt="MyKerja Home Screen">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- LABS -->
+    <!-- ===== INTRODUCTION + SDG ===== -->
+    <section id="introduction">
+        <div class="container">
+            <div class="section-title">
+                <h2>About My e-Portfolio</h2>
+                <p>Introduction & Sustainable Development Goal</p>
+            </div>
+            <div class="grid">
+
+                <!-- CARD KIRI: STUDENT INFO -->
+                <div class="card">
+                    <div>
+                        <span class="badge">Student Information</span>
+                        <div class="student-profile">
+                            <img src="images/nabihah.png" alt="Nur Nabihah">
+                            <div class="info">
+                                <h3>Nur Nabihah Binti Alwi</h3>
+                                <p><strong>Matric No:</strong> A210814</p>
+                                <p><strong>Programme:</strong> Bachelor of Information Technology</p>
+                                <p><strong>University:</strong> Universiti Kebangsaan Malaysia</p>
+                                <p><strong>Instructor:</strong> Dr Rimaniza</p>
+                            </div>
+                        </div>
+                        <br>
+                        <p>
+                            This e-Portfolio documents my learning journey in Mobile Programming using Jetpack Compose.
+                            Throughout this course, I developed an application called <strong>MyKerja</strong>, a dual-role
+                            job platform consisting of Jobseeker and Company users.
+                        </p>
+                        <br>
+                        <p>
+                            Jobseekers can search and apply for job opportunities, while companies can post job vacancies
+                            and manage applicants within the same system. This project demonstrates how modern Android
+                            application development can solve real-world problems using Kotlin, Jetpack Compose, Room Database,
+                            Firebase, REST API, GPS and QR technology.
+                        </p>
+                    </div>
+                    <!-- ===== CONTACT ME DI BAWAH SEKALI ===== -->
+                    <a href="https://wa.me/60138783473" target="_blank" class="contact-btn">
+                        Contact Me
+                    </a>
+                </div>
+
+                <!-- CARD KANAN: SDG -->
+                <div class="card">
+                    <div>
+                        <div class="poster">
+                            <img src="images/sdg1.png" alt="SDG 1 No Poverty">
+                        </div>
+                        <span class="badge">United Nations Sustainable Development Goal</span>
+                        <h3>SDG 1 : No Poverty</h3>
+                        <br>
+                        <p>
+                            MyKerja supports <strong>Sustainable Development Goal 1 (No Poverty)</strong> by improving access
+                            to employment opportunities through digital technology.
+                        </p>
+                        <br>
+                        <p>
+                            The application allows job seekers to search and apply for suitable jobs while enabling employers
+                            to post vacancies and manage applicants efficiently. By connecting both parties in one integrated
+                            platform, MyKerja promotes employment opportunities, supports income generation, and contributes
+                            to reducing poverty through accessible digital services.
+                        </p>
+                    </div>
+                    <a href="https://sdgs.un.org/goals/goal1" target="_blank" class="btn">Learn More</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LABS ===== -->
     <section id="labs">
-      <h2 class="section-title">🧪 Labs</h2>
-      <div class="card-grid">
-        <!-- Lab 1 -->
-        <div class="card"><h3>Lab 1 · UI</h3><span class="badge">Row · Column · Box</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/on1KDZXzg-8" allowfullscreen loading="lazy"></iframe></div>
-          <div class="reflection">In this lab, I learned the fundamentals of Jetpack Compose UI development using Row, Column, and Box layouts. I understood how declarative UI works in Android development. This knowledge helped me design a structured and responsive interface for MyKerja.</div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Laboratory Activities</h2>
+                <p>Mobile Programming Learning Journey</p>
+            </div>
+            <div class="grid">
+
+                <!-- LAB 1 -->
+                <div class="card">
+                    <div class="poster"><img src="images/lab1.png" alt="Lab 1 Poster"></div>
+                    <span class="badge">Lab 1 • User Interface</span>
+                    <h3>Lab 1 – Jetpack Compose UI</h3>
+                    <br>
+                    <p>
+                        This laboratory introduced the basic concepts of Jetpack Compose. The application interface was
+                        developed using fundamental layouts such as <strong>Row</strong>, <strong>Column</strong>, and
+                        <strong>Box</strong>, together with Text, Image, and Button components.
+                    </p>
+                    <iframe src="https://www.youtube.com/embed/on1KDZXzg-8" allowfullscreen></iframe>
+                    <br><br>
+                    <h4>Reflection</h4>
+                    <p>
+                        In this lab, I learned the fundamentals of Jetpack Compose UI development using Row, Column, and
+                        Box layouts. I understood how declarative UI works in Android development. This knowledge helped
+                        me design a structured and responsive interface for MyKerja.
+                    </p>
+                </div>
+
+                <!-- LAB 2 -->
+                <div class="card">
+                    <div class="poster"><img src="images/lab2.png" alt="Lab 2 Poster"></div>
+                    <span class="badge">Lab 2 • User Interaction</span>
+                    <h3>Lab 2 – Interaction & State Management</h3>
+                    <br>
+                    <p>
+                        This laboratory focused on creating interactive Android applications using TextField, Button,
+                        mutableStateOf and state management. User inputs were dynamically reflected on the interface
+                        through recomposition.
+                    </p>
+                    <iframe src="https://www.youtube.com/embed/sQ8PbG2YPrA" allowfullscreen></iframe>
+                    <br><br>
+                    <h4>Reflection</h4>
+                    <p>
+                        This lab introduced state management using TextField, Button, and mutableStateOf. I learned how
+                        user input dynamically updates the UI through recomposition. This is essential for interactive
+                        features in MyKerja.
+                    </p>
+                </div>
+
+                <!-- LAB 3 -->
+                <div class="card">
+                    <div class="poster"><img src="images/lab3.png" alt="Lab 3 Poster"></div>
+                    <span class="badge">Lab 3 • Material Design</span>
+                    <h3>Lab 3 – Material Design 3</h3>
+                    <br>
+                    <p>
+                        In this laboratory, Material Design 3 components were implemented to improve application
+                        consistency. Themes, Cards, Typography and Color Schemes were applied to create a modern Android
+                        interface.
+                    </p>
+                    <iframe src="https://www.youtube.com/embed/dAj0bGE255U" allowfullscreen></iframe>
+                    <br><br>
+                    <h4>Reflection</h4>
+                    <p>
+                        I applied Material 3 theming including colors, typography, and Card layouts. This improved the UI
+                        consistency and user experience. It made my application look more professional and user-friendly.
+                    </p>
+                </div>
+
+                <!-- LAB 4 -->
+                <div class="card">
+                    <div class="poster"><img src="images/lab4.png" alt="Lab 4 Poster"></div>
+                    <span class="badge">Lab 4 • Navigation</span>
+                    <h3>Lab 4 – Navigation & ViewModel</h3>
+                    <br>
+                    <p>
+                        This laboratory introduced multi-screen application development using Navigation Compose. It also
+                        demonstrated how ViewModel can be used to preserve UI state and share data between different
+                        screens while maintaining a clean MVVM architecture.
+                    </p>
+                    <iframe src="https://www.youtube.com/embed/EMwbtSsAqP8" allowfullscreen></iframe>
+                    <br><br>
+                    <h4>Reflection</h4>
+                    <p>
+                        I implemented multi-screen navigation using NavController and ViewModel for shared state
+                        management. I learned how data can be passed and preserved across different screens. This made
+                        MyKerja more scalable and closer to a real-world application.
+                    </p>
+                </div>
+
+                <!-- LAB 5 -->
+                <div class="card">
+                    <div class="poster"><img src="images/lab5.png" alt="Lab 5 Poster"></div>
+                    <span class="badge">Lab 5 • Room Database</span>
+                    <h3>Lab 5 – Room Database Integration</h3>
+                    <br>
+                    <p>
+                        This laboratory focused on implementing Room Database using Entity, DAO, Repository, and
+                        ViewModel. The application was enhanced with local data persistence, allowing information to be
+                        stored and retrieved even when the device is offline.
+                    </p>
+                    <iframe src="https://www.youtube.com/embed/3CnKT8aCzQI" allowfullscreen></iframe>
+                    <br><br>
+                    <h4>Reflection</h4>
+                    <p>
+                        I integrated Room Database using DAO, Repository, and ViewModel architecture. This enabled
+                        offline data storage and persistence within the application. I now understand how local databases
+                        are used in real Android applications.
+                    </p>
+                </div>
+
+            </div>
         </div>
-        <!-- Lab 2 -->
-        <div class="card"><h3>Lab 2 · Interaction</h3><span class="badge">TextField · Button · state</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/sQ8PbG2YPrA" allowfullscreen loading="lazy"></iframe></div>
-          <div class="reflection">This lab introduced state management using TextField, Button, and mutableStateOf. I learned how user input dynamically updates the UI through recomposition. This is essential for interactive features in MyKerja.</div>
-        </div>
-        <!-- Lab 3 -->
-        <div class="card"><h3>Lab 3 · Material Design</h3><span class="badge">Material 3 · Cards</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/dAj0bGE255U" allowfullscreen loading="lazy"></iframe></div>
-          <div class="reflection">I applied Material 3 theming including colors, typography, and Card layouts. This improved the UI consistency and user experience. It made my application look more professional and user-friendly.</div>
-        </div>
-        <!-- Lab 4 -->
-        <div class="card"><h3>Lab 4 · Navigation</h3><span class="badge">NavController · ViewModel</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/EMwbtSsAqP8" allowfullscreen loading="lazy"></iframe></div>
-          <div class="reflection">I implemented multi-screen navigation using NavController and ViewModel for shared state management. I learned how data can be passed and preserved across different screens. This made MyKerja more scalable and closer to a real-world application.</div>
-        </div>
-        <!-- Lab 5 -->
-        <div class="card"><h3>Lab 5 · Room</h3><span class="badge">DAO · Repository · ViewModel</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/3CnKT8aCzQI" allowfullscreen loading="lazy"></iframe></div>
-          <div class="reflection">I integrated Room Database using DAO, Repository, and ViewModel architecture. This enabled offline data storage and persistence within the application. I now understand how local databases are used in real Android applications.</div>
-        </div>
-      </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- ===== PROJECTS ===== -->
     <section id="projects">
-      <h2 class="section-title">📱 Projects</h2>
-      <div class="card-grid">
-        <!-- Project 1 -->
-        <div class="card"><h3>MyKerja · Project 1</h3><span class="badge">Lab 4 + unified roles</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/VdXQAl5HH2s" allowfullscreen loading="lazy"></iframe></div>
-          <p><strong>Problem:</strong> Job seekers and employers lack a centralized, reliable platform. MyKerja unifies Jobseeker & Company features in one account system.</p>
-          <div class="reflection">I learned to implement navigation with Jetpack Compose, manage shared state via ViewModel, and design an SDG-aligned app with multi‑user role architecture. Improved my understanding of real‑world app architecture.</div>
-          <div class="btn-group"><a href="#" class="btn btn-github" style="pointer-events:none;opacity:0.7;">🔗 View on GitHub</a><span style="font-size:0.75rem;color:#14636e;">(repo private)</span></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>My Projects</h2>
+                <p>Application Development Throughout This Course</p>
+            </div>
+            <div class="grid">
+
+                <!-- PROJECT 1 -->
+                <div class="card">
+                    <div class="poster">
+                        <img src="images/project1.png" alt="MyKerja Project 1 Screenshot">
+                    </div>
+                    <span class="badge">Project 1 • Lab 4 + Working Features</span>
+                    <h3>MYKERJA</h3>
+                    <br>
+                    <p><strong>Problem Statement</strong></p>
+                    <p>
+                        Many job seekers face difficulty accessing centralized and reliable job information, while
+                        employers also struggle to find suitable candidates efficiently. This project addresses both
+                        issues by implementing a single integrated application where both Jobseeker and Company
+                        functionalities exist within the same account system. Users can access both roles without
+                        switching accounts, allowing Jobseekers to search and apply for jobs while Companies can post
+                        vacancies and manage applicants in the same unified platform.
+                    </p>
+                    <br>
+                    <h4>Technologies Used</h4>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">Kotlin</span>
+                        <span class="badge">Jetpack Compose</span>
+                        <span class="badge">Navigation Compose</span>
+                        <span class="badge">ViewModel</span>
+                        <span class="badge">Material 3</span>
+                    </div>
+                    <br>
+                    <iframe src="https://www.youtube.com/embed/VdXQAl5HH2s" allowfullscreen></iframe>
+                    <br><br>
+                    <!-- ===== BUTTON GROUP ===== -->
+                    <div class="btn-group">
+                        <a href="https://github.com/a210814/A210814_Nabihah_DrNiza_Project1" target="_blank" class="btn">💻 View on GitHub</a>
+                        <a href="https://youtu.be/VdXQAl5HH2s" target="_blank" class="btn btn-outline">▶ Watch Demo</a>
+                    </div>
+                    <br>
+                    <h4>Lessons Learned</h4>
+                    <p>
+                        I learned how to implement navigation using Jetpack Compose, manage shared state using ViewModel,
+                        and design an SDG-aligned mobile application with a multi-user role system within a single
+                        application architecture. This project strengthened my understanding of MVVM architecture,
+                        navigation flow, reusable UI components, and Android application development using Jetpack
+                        Compose.
+                    </p>
+                </div>
+
+                <!-- PROJECT 2 -->
+                <div class="card">
+                    <div class="poster">
+                        <img src="images/project2.png" alt="MyKerja Project 2 Screenshot">
+                    </div>
+                    <span class="badge">Project 2 • Lab 5 + API + Sensors + Cloud</span>
+                    <h3>MYKERJA</h3>
+                    <br>
+                    <p><strong>Problem Statement</strong></p>
+                    <p>
+                        While Project 1 focused on a single integrated system, it lacked proper role separation and
+                        authentication. This enhanced version introduces a login system where users must select their
+                        role (Jobseeker or Company) during authentication, resulting in different UI flows and
+                        permissions for each role.
+                    </p>
+                    <br>
+                    <p>
+                        Additionally, Jobseekers can scan QR codes provided by companies to access job details
+                        instantly, while GPS functionality displays location-based job information. Firebase Firestore
+                        enables cloud data synchronization, creating a more secure, personalized, and practical
+                        application for real-world use.
+                    </p>
+                    <br>
+                    <h4>Technologies Used</h4>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">Kotlin</span>
+                        <span class="badge">Jetpack Compose</span>
+                        <span class="badge">Room</span>
+                        <span class="badge">Firebase Auth</span>
+                        <span class="badge">Firestore</span>
+                        <span class="badge">REST API</span>
+                        <span class="badge">Retrofit</span>
+                        <span class="badge">GPS</span>
+                        <span class="badge">QR Scanner</span>
+                    </div>
+                    <br>
+                    <iframe src="https://www.youtube.com/embed/7mwspFx_D2I" allowfullscreen></iframe>
+                    <br><br>
+                    <!-- ===== BUTTON GROUP ===== -->
+                    <div class="btn-group">
+                        <a href="https://github.com/a210814/A210814_Nabihah_DrNiza_Project2" target="_blank" class="btn">💻 View on GitHub</a>
+                        <a href="https://youtu.be/7mwspFx_D2I" target="_blank" class="btn btn-outline">▶ Watch Demo</a>
+                    </div>
+                    <br>
+                    <h4>Lessons Learned</h4>
+                    <p>
+                        I learned advanced Android development including authentication-based navigation, role-based UI
+                        design, Room Database, Firebase Firestore, REST API integration, GPS location services, and
+                        QR/barcode scanning. This project helped me understand how real production mobile applications
+                        manage users, roles, cloud databases, device hardware, and secure authentication within a
+                        scalable Android application.
+                    </p>
+                </div>
+
+            </div>
         </div>
-        <!-- Project 2 -->
-        <div class="card"><h3>MyKerja · Project 2</h3><span class="badge">Auth · GPS · QR · Firestore</span>
-          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/VdXQAl5HH2s" allowfullscreen loading="lazy"></iframe></div>
-          <p><strong>Problem:</strong> Project 1 lacked role separation & authentication. This version adds login with role‑based UI, QR scanning, GPS location, and cloud sync.</p>
-          <div class="reflection">Learned advanced Android: authentication navigation, role‑based UI, Room, Firebase Firestore, REST API, GPS, and QR scanning. Understood how production apps manage users, roles, and hardware.</div>
-          <div class="btn-group"><a href="#" class="btn btn-github" style="pointer-events:none;opacity:0.7;">🔗 View on GitHub</a><span style="font-size:0.75rem;color:#14636e;">(repo private)</span></div>
-        </div>
-      </div>
     </section>
 
-    <!-- REFLECTION -->
+    <!-- ===== REFLECTION ===== -->
     <section id="reflection">
-      <h2 class="section-title">📝 Reflection & Learning Journey</h2>
-      <div style="background:white; border-radius:28px; padding:1.8rem 2rem; border:1px solid #bce0e0;">
-        <p>Throughout this Mobile Programming course, I gradually developed a deeper understanding of Android application development using Kotlin and Jetpack Compose. Starting from simple UI design, I progressed to implementing user interaction, Material Design, multi-screen navigation, ViewModel state management, and local database integration using Room.</p><br>
-        <p>The final project challenged me to integrate multiple technologies including Firebase Firestore, REST APIs, GPS location services, and QR/barcode scanning into a single application. Although I encountered debugging and compatibility issues, each challenge improved my problem-solving skills and strengthened my understanding of real-world mobile system architecture.</p><br>
-        <p>Overall, this course has strengthened both my technical and software engineering skills. It also encouraged me to design applications that solve real-world problems aligned with the United Nations Sustainable Development Goals (SDGs).</p>
-      </div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Reflection & Learning Journey</h2>
+                <p>My experience throughout this Mobile Programming course</p>
+            </div>
+            <div class="card">
+                <p>
+                    Throughout this Mobile Programming course, I gradually developed a deeper understanding of Android
+                    application development using Kotlin and Jetpack Compose. Starting from simple UI design, I progressed
+                    to implementing user interaction, Material Design, multi-screen navigation, ViewModel state management,
+                    and local database integration using Room.
+                </p>
+                <br>
+                <p>
+                    The final project challenged me to integrate multiple technologies including Firebase Firestore, REST
+                    APIs, GPS location services, and QR/barcode scanning into a single application. Although I encountered
+                    debugging and compatibility issues, each challenge improved my problem-solving skills and strengthened
+                    my understanding of real-world mobile system architecture.
+                </p>
+                <br>
+                <p>
+                    Overall, this course has strengthened both my technical and software engineering skills. It also
+                    encouraged me to design applications that solve real-world problems aligned with the United Nations
+                    Sustainable Development Goals (SDGs).
+                </p>
+            </div>
+        </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- ===== SKILLS ===== -->
     <section id="skills">
-      <h2 class="section-title">⚙️ Skills & Tech Stack</h2>
-      <div class="two-col">
-        <div style="background:white; border-radius:28px; padding:1.2rem 1.8rem; border:1px solid #bce0e0;">
-          <h4 style="color:#0d535f;">Programming</h4>
-          <div class="flex-wrap"><span class="skill-tag">Kotlin</span><span class="skill-tag">XML</span><span class="skill-tag">SQL</span></div>
-          <h4 style="color:#0d535f; margin-top:0.5rem;">Android</h4>
-          <div class="flex-wrap"><span class="skill-tag">Jetpack Compose</span><span class="skill-tag">Navigation Compose</span><span class="skill-tag">ViewModel</span><span class="skill-tag">Material 3</span></div>
-          <h4 style="color:#0d535f; margin-top:0.5rem;">DB & Backend</h4>
-          <div class="flex-wrap"><span class="skill-tag">Room</span><span class="skill-tag">Firestore</span><span class="skill-tag">Auth</span></div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Tech Stack</h2>
+                <p>Technologies and tools used throughout this course</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Programming Languages</h3>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">Kotlin</span>
+                        <span class="badge">XML</span>
+                        <span class="badge">SQL</span>
+                    </div>
+                    <br>
+                    <h3>Android Development</h3>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">Jetpack Compose</span>
+                        <span class="badge">Navigation Compose</span>
+                        <span class="badge">ViewModel</span>
+                        <span class="badge">State Management</span>
+                        <span class="badge">Material Design 3</span>
+                    </div>
+                    <br>
+                    <h3>Database & Backend</h3>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">Room Database</span>
+                        <span class="badge">Firebase Firestore</span>
+                        <span class="badge">Firebase Authentication</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Networking</h3>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">REST API</span>
+                        <span class="badge">JSON</span>
+                        <span class="badge">Retrofit</span>
+                    </div>
+                    <br>
+                    <h3>Hardware Integration</h3>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">GPS</span>
+                        <span class="badge">QR Scanner</span>
+                    </div>
+                    <br>
+                    <h3>Development Tools</h3>
+                    <br>
+                    <div class="badge-group">
+                        <span class="badge">Android Studio</span>
+                        <span class="badge">Git</span>
+                        <span class="badge">GitHub</span>
+                        <span class="badge">Gradle</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Professional Skills</h3>
+                    <br>
+                    <ul style="padding-left:20px;color:#67628A;line-height:2;">
+                        <li>Problem-solving and analytical thinking</li>
+                        <li>UI / UX Design</li>
+                        <li>Debugging & Troubleshooting</li>
+                        <li>Android Application Development</li>
+                        <li>MVVM Architecture</li>
+                        <li>Team collaboration and project planning</li>
+                        <li>Software documentation</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div style="background:white; border-radius:28px; padding:1.2rem 1.8rem; border:1px solid #bce0e0;">
-          <h4 style="color:#0d535f;">Networking & Hardware</h4>
-          <div class="flex-wrap"><span class="skill-tag">REST API</span><span class="skill-tag">Retrofit</span><span class="skill-tag">GPS</span><span class="skill-tag">QR Scanner</span></div>
-          <h4 style="color:#0d535f; margin-top:0.5rem;">Tools & soft skills</h4>
-          <div class="flex-wrap"><span class="skill-tag">Android Studio</span><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Gradle</span></div>
-          <p style="margin-top:0.8rem; font-size:0.9rem;">• Problem-solving · UI/UX design · Debugging · MVVM architecture</p>
-        </div>
-      </div>
     </section>
 
-    <!-- RESOURCES -->
+    <!-- ===== RESOURCES ===== -->
     <section id="resources">
-      <h2 class="section-title">📚 Resources</h2>
-      <div style="background:white; border-radius:28px; padding:1.5rem 2rem; border:1px solid #bce0e0;">
-        <div style="display:flex; flex-wrap:wrap; gap:1.2rem 2rem;">
-          <div><h4 style="color:#0d535f; margin-bottom:0.3rem;">Libraries & Frameworks</h4>
-            <div class="flex-wrap"><span class="skill-tag">Jetpack Compose</span><span class="skill-tag">Navigation</span><span class="skill-tag">ViewModel</span><span class="skill-tag">Room</span><span class="skill-tag">Firestore</span><span class="skill-tag">Firebase Auth</span><span class="skill-tag">Material 3</span><span class="skill-tag">Kotlin Coroutines</span><span class="skill-tag">Retrofit</span><span class="skill-tag">Google Location</span><span class="skill-tag">ML Kit / QR</span></div>
-          </div>
-          <div><h4 style="color:#0d535f; margin-bottom:0.3rem;">Learning & Acknowledgement</h4>
-            <p>Android Developers · Kotlin Docs · Compose Codelabs · Firebase Docs · Material Design Guidelines</p>
-            <p style="margin-top:0.3rem; font-size:0.9rem; background:#e2f2f5; padding:0.4rem 1rem; border-radius:40px;">AI‑assisted (ChatGPT, Gemini) for debugging, documentation & structure.</p>
-          </div>
+        <div class="container">
+            <div class="section-title">
+                <h2>Resources</h2>
+                <p>Libraries, Frameworks & Learning Resources</p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>Libraries & Frameworks</h3>
+                    <br>
+                    <ul style="padding-left:20px;color:#67628A;line-height:2;">
+                        <li>Jetpack Compose</li>
+                        <li>Navigation Compose</li>
+                        <li>ViewModel</li>
+                        <li>Room Database</li>
+                        <li>Firebase Firestore</li>
+                        <li>Firebase Authentication</li>
+                        <li>Material Design 3</li>
+                        <li>Kotlin Coroutines</li>
+                        <li>Retrofit</li>
+                        <li>Google Location Services API</li>
+                        <li>ML Kit QR Scanner</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Learning Resources</h3>
+                    <br>
+                    <ul style="padding-left:20px;color:#67628A;line-height:2;">
+                        <li>Android Developers Official Documentation</li>
+                        <li>Kotlin Documentation</li>
+                        <li>Jetpack Compose Codelabs</li>
+                        <li>Firebase Documentation</li>
+                        <li>Google Material Design Guidelines</li>
+                        <li>YouTube Tutorials</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Acknowledgement</h3>
+                    <br>
+                    <p>
+                        This e-Portfolio was developed using knowledge gained throughout the Mobile Programming course
+                        together with official Android documentation, YouTube learning resources, and online references.
+                    </p>
+                    <br>
+                    <p>
+                        AI-assisted tools such as <strong>ChatGPT</strong> and <strong>Gemini</strong> were used
+                        responsibly as learning aids to improve understanding, debugging, documentation structure, and
+                        code explanation. All implementation, testing, and final verification were completed by the
+                        author.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer>
-      <div class="footer-content">
-        <strong>Nur Nabihah Binti Alwi</strong> · A210814 · Bachelor of Information Technology · UKM
-        <span>📅 2026 · e‑Portfolio for Mobile Programming (Dr Rimaniza)</span>
-        <span style="opacity:0.7; font-size:0.85rem;">🌱 MyKerja – SDG 1: No Poverty · built with Jetpack Compose</span>
-      </div>
+        <h2>Nur Nabihah Binti Alwi</h2>
+        <p>Matric No: A210814</p>
+        <p>Bachelor of Information Technology</p>
+        <p>Universiti Kebangsaan Malaysia</p>
+        <p>Instructor: Dr Rimaniza</p>
+        <br>
+        <p>Mobile Programming e-Portfolio</p>
+        <p>© 2026 All Rights Reserved</p>
     </footer>
-  </div>
+
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <button id="topBtn" title="Go to top">↑</button>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ---------- BACK TO TOP ----------
+        const topBtn = document.getElementById("topBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        };
+        topBtn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        // ---------- REVEAL ANIMATION ----------
+        const reveals = document.querySelectorAll("section");
+
+        function revealSection() {
+            const windowHeight = window.innerHeight;
+            const revealPoint = 120;
+
+            reveals.forEach(el => {
+                const revealTop = el.getBoundingClientRect().top;
+                if (revealTop < windowHeight - revealPoint) {
+                    el.classList.add("reveal");
+                    el.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", revealSection);
+        revealSection();
+
+        // ---------- ACTIVE NAVIGATION ----------
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".menu a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href") === "#" + current) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+
 </body>
+
 </html>
