@@ -263,7 +263,6 @@
             padding: 28px;
             box-shadow: var(--shadow);
             transition: .35s;
-            /* ===== FLEX COLUMN UNTUK TOLAK BUTTON KE BAWAH ===== */
             display: flex;
             flex-direction: column;
         }
@@ -311,7 +310,6 @@
             align-self: flex-start;
         }
 
-        /* ===== BADGE GROUP (untuk Technologies Used & Skills) ===== */
         .badge-group {
             display: flex;
             flex-wrap: wrap;
@@ -323,7 +321,6 @@
             margin-bottom: 0;
         }
 
-        /* ===== BUTTONS ===== */
         .btn {
             display: inline-block;
             padding: 14px 25px;
@@ -354,7 +351,6 @@
             color: white;
         }
 
-        /* ===== BUTTON GROUP (untuk Projects) ===== */
         .btn-group {
             display: flex;
             flex-wrap: wrap;
@@ -366,14 +362,12 @@
             margin-top: 0;
         }
 
-        /* ===== TOLAK SEMUA BUTTON KE BAWAH CARD ===== */
         .card .btn,
         .card .contact-btn {
             margin-top: auto;
             align-self: flex-start;
         }
 
-        /* ===== STUDENT PROFILE ===== */
         .student-profile {
             display: flex;
             gap: 25px;
@@ -382,7 +376,6 @@
             margin-bottom: 15px;
         }
 
-        /* ===== IMEJ: tiada border, saiz 170px ===== */
         .student-profile img {
             width: 170px;
             height: 170px;
@@ -399,7 +392,6 @@
             flex-direction: column;
         }
 
-        /* ===== CONTACT BUTTON (SAMA MACAM LEARN MORE) ===== */
         .contact-btn {
             display: inline-block;
             padding: 14px 25px;
@@ -419,7 +411,6 @@
             transform: translateY(-3px);
         }
 
-        /* ===== FOOTER ===== */
         footer {
             background: #372A76;
             color: white;
@@ -433,7 +424,6 @@
             margin-top: 10px;
         }
 
-        /* ===== BACK TO TOP ===== */
         #topBtn {
             position: fixed;
             bottom: 30px;
@@ -457,7 +447,6 @@
             transform: translateY(-4px);
         }
 
-        /* ===== REVEAL ANIMATION ===== */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -479,8 +468,16 @@
             .hero h1 {
                 font-size: 40px;
             }
+            /* ===== BUANG display:none; biar menu kelihatan ===== */
             .menu {
-                display: none;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px 18px;
+                justify-content: center;
+                margin-top: 5px;
+            }
+            .menu a {
+                font-size: 14px;
             }
             .search-box {
                 flex-direction: column;
@@ -514,9 +511,15 @@
             .btn-group .btn-outline {
                 margin-left: 0;
             }
+            /* ===== Susun nav pada mobile ===== */
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 20px;
+            }
         }
 
-        /* ===== RESPONSIVE UNTUK TABLET KECIL ===== */
         @media(max-width:600px) {
             .grid {
                 grid-template-columns: 1fr;
@@ -538,6 +541,12 @@
             .contact-btn {
                 padding: 12px 20px;
                 font-size: 14px;
+            }
+            .menu a {
+                font-size: 13px;
+            }
+            .menu {
+                gap: 8px 12px;
             }
         }
     </style>
@@ -614,7 +623,7 @@
                                 <h3>Nur Nabihah Binti Alwi</h3>
                                 <p><strong>Matric No:</strong> A210814</p>
                                 <p><strong>Programme:</strong> Bachelor of Information Technology</p>
-                                <p><strong>University:</strong> Universiti Kebangsaan Malaysia</p>
+                                <p><strong>University:</strong> Universiti Kebangsaan Malaysia </p>
                                 <p><strong>Instructor:</strong> Dr Rimaniza</p>
                             </div>
                         </div>
@@ -632,7 +641,6 @@
                             Firebase, REST API, GPS and QR technology.
                         </p>
                     </div>
-                    <!-- ===== CONTACT ME DI BAWAH SEKALI ===== -->
                     <a href="https://wa.me/60138783473" target="_blank" class="contact-btn">
                         Contact Me
                     </a>
@@ -822,7 +830,6 @@
                     <br>
                     <iframe src="https://www.youtube.com/embed/VdXQAl5HH2s" allowfullscreen></iframe>
                     <br><br>
-                    <!-- ===== BUTTON GROUP ===== -->
                     <div class="btn-group">
                         <a href="https://github.com/a210814/A210814_Nabihah_DrNiza_Project1" target="_blank" class="btn">💻 View on GitHub</a>
                         <a href="https://youtu.be/VdXQAl5HH2s" target="_blank" class="btn btn-outline">▶ Watch Demo</a>
@@ -877,7 +884,6 @@
                     <br>
                     <iframe src="https://www.youtube.com/embed/7mwspFx_D2I" allowfullscreen></iframe>
                     <br><br>
-                    <!-- ===== BUTTON GROUP ===== -->
                     <div class="btn-group">
                         <a href="https://github.com/a210814/A210814_Nabihah_DrNiza_Project2" target="_blank" class="btn">💻 View on GitHub</a>
                         <a href="https://youtu.be/7mwspFx_D2I" target="_blank" class="btn btn-outline">▶ Watch Demo</a>
