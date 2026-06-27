@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Nur Nabihah · Mobile e-Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f4f9fc; /* soft blue-white base, matches SDG blue/green vibe */
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      color: #023b4a;
+      line-height: 1.5;
+      padding-top: 68px; /* sticky nav height */
+    }
+
+    /* sticky nav – inspired by MyKerja top bar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #0a3140; /* deep teal-blue, similar to MyKerja header */
+      backdrop-filter: blur(2px);
+      box-shadow: 0 4px 12px rgba(0,40,50,0.2);
+      z-index: 999;
+      padding: 0 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      border-bottom: 2px solid #3d9c9c;
+    }
+
+    .nav-brand {
+      color: white;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: -0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-brand small {
+      font-weight: 300;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #e0f2f5;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 4px 2px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: #8dd0d0;
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* main container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.2rem 2.5rem;
+    }
+
+    /* sections */
+    section {
+      margin: 2.8rem 0 3.5rem;
+      scroll-margin-top: 80px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #135e6b;
+      border-left: 6px solid #3bac9c;
+      padding-left: 1rem;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.3px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.5rem 1.5rem 1.8rem;
+      box-shadow: 0 8px 24px rgba(0, 60, 70, 0.08);
+      transition: transform 0.15s ease, box-shadow 0.2s;
+      border: 1px solid rgba(60, 160, 160, 0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 32px rgba(20, 100, 110, 0.12);
+      border-color: #9cd0d0;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      color: #0f4b57;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .card .badge {
+      display: inline-block;
+      background: #d7edf0;
+      color: #13616b;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      letter-spacing: 0.4px;
+      margin-bottom: 0.8rem;
+      align-self: flex-start;
+    }
+
+    .card p {
+      color: #1f4e57;
+      margin: 0.4rem 0 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .card .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 0.8rem 0 0.6rem;
+      background: #d2e6ea;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .reflection {
+      background: #eef8fa;
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      font-size: 0.9rem;
+      margin: 0.6rem 0 0.8rem;
+      border-left: 4px solid #3bac9c;
+      color: #05444f;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: auto;
+      padding-top: 0.8rem;
+      align-items: center;
+    }
+
+    .btn {
+      background: #14636e;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      box-shadow: 0 2px 6px rgba(0,60,70,0.15);
+      border: 1px solid #289b9b;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #14636e;
+      border: 1.5px solid #14636e;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #14636e;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #0e525c;
+      transform: scale(0.97);
+    }
+
+    .btn-github {
+      background: #1b2b34;
+      border-color: #1b2b34;
+    }
+
+    .btn-github:hover {
+      background: #0b1a22;
+    }
+
+    footer {
+      background: #0a3140;
+      color: #d4e9ed;
+      padding: 2.2rem 1.5rem;
+      border-radius: 40px 40px 0 0;
+      margin-top: 3.5rem;
+      text-align: center;
+      border-top: 2px solid #4da8a8;
+    }
+
+    footer .footer-content {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    footer strong {
+      color: #c4edf0;
+    }
+
+    .intro-box {
+      background: white;
+      border-radius: 32px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 4px 14px rgba(0,60,70,0.04);
+      border: 1px solid #bce0e0;
+      margin-bottom: 1.2rem;
+    }
+
+    .sdg-tag {
+      background: #03444f;
+      color: white;
+      border-radius: 50px;
+      padding: 0.2rem 1.4rem;
+      font-weight: 500;
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      margin: 0.2rem 0 0.6rem;
+    }
+
+    hr {
+      border: 1px solid #b1d7db;
+      margin: 1.8rem 0;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: #d2ecf0;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #04454f;
+      margin: 0.2rem 0.2rem;
+    }
+
+    .flex-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.8rem;
+      margin: 0.8rem 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 680px) {
+      .two-col { grid-template-columns: 1fr; }
+      .nav-links { gap: 0.4rem 0.9rem; justify-content: center; }
+      nav { flex-direction: column; align-items: center; padding: 0.4rem 0.8rem; }
+      body { padding-top: 100px; }
+      .section-title { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- sticky nav -->
+  <nav>
+    <div class="nav-brand">
+      🌱 MyKerja<span style="font-weight:300;margin-left:6px;font-size:0.9rem;">· e-Portfolio</span>
+    </div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#labs">Labs</a>
+      <a href="#projects">Projects</a>
+      <a href="#reflection">Reflection</a>
+      <a href="#skills">Skills</a>
+      <a href="#resources">Resources</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- HOME / intro -->
+    <section id="home">
+      <div class="intro-box">
+        <h1 style="font-size:2.3rem; color:#0b4857; margin-bottom:0.2rem;">Nur Nabihah Binti Alwi</h1>
+        <p style="font-size:1.1rem; color:#115f6b;"><strong>A210814</strong> · Bachelor of Information Technology · UKM</p>
+        <p style="color:#1c5a64; margin:0.5rem 0 0.2rem;">Instructor: Dr Rimaniza</p>
+        <div class="sdg-tag">🌍 SDG 1 – No Poverty</div>
+        <p style="margin:0.6rem 0 0.2rem; font-size:1rem;">This e-Portfolio documents my learning journey in Mobile Programming using Jetpack Compose. I developed <strong>MyKerja</strong>, a dual‑role job platform where Jobseekers search & apply, and Companies post vacancies – all in one app. Aligned with SDG 1 (No Poverty) by improving job accessibility and income stability.</p>
+        <p style="background:#e1f3f5; padding:0.4rem 1rem; border-radius:40px; display:inline-block; margin-top:0.6rem;">📱 MyKerja · jobseeker + company unified</p>
+      </div>
+    </section>
+
+    <!-- LABS -->
+    <section id="labs">
+      <h2 class="section-title">🧪 Labs</h2>
+      <div class="card-grid">
+        <!-- Lab 1 -->
+        <div class="card"><h3>Lab 1 · UI</h3><span class="badge">Row · Column · Box</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/on1KDZXzg-8" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reflection">In this lab, I learned the fundamentals of Jetpack Compose UI development using Row, Column, and Box layouts. I understood how declarative UI works in Android development. This knowledge helped me design a structured and responsive interface for MyKerja.</div>
+        </div>
+        <!-- Lab 2 -->
+        <div class="card"><h3>Lab 2 · Interaction</h3><span class="badge">TextField · Button · state</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/sQ8PbG2YPrA" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reflection">This lab introduced state management using TextField, Button, and mutableStateOf. I learned how user input dynamically updates the UI through recomposition. This is essential for interactive features in MyKerja.</div>
+        </div>
+        <!-- Lab 3 -->
+        <div class="card"><h3>Lab 3 · Material Design</h3><span class="badge">Material 3 · Cards</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/dAj0bGE255U" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reflection">I applied Material 3 theming including colors, typography, and Card layouts. This improved the UI consistency and user experience. It made my application look more professional and user-friendly.</div>
+        </div>
+        <!-- Lab 4 -->
+        <div class="card"><h3>Lab 4 · Navigation</h3><span class="badge">NavController · ViewModel</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/EMwbtSsAqP8" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reflection">I implemented multi-screen navigation using NavController and ViewModel for shared state management. I learned how data can be passed and preserved across different screens. This made MyKerja more scalable and closer to a real-world application.</div>
+        </div>
+        <!-- Lab 5 -->
+        <div class="card"><h3>Lab 5 · Room</h3><span class="badge">DAO · Repository · ViewModel</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/3CnKT8aCzQI" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reflection">I integrated Room Database using DAO, Repository, and ViewModel architecture. This enabled offline data storage and persistence within the application. I now understand how local databases are used in real Android applications.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">📱 Projects</h2>
+      <div class="card-grid">
+        <!-- Project 1 -->
+        <div class="card"><h3>MyKerja · Project 1</h3><span class="badge">Lab 4 + unified roles</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/VdXQAl5HH2s" allowfullscreen loading="lazy"></iframe></div>
+          <p><strong>Problem:</strong> Job seekers and employers lack a centralized, reliable platform. MyKerja unifies Jobseeker & Company features in one account system.</p>
+          <div class="reflection">I learned to implement navigation with Jetpack Compose, manage shared state via ViewModel, and design an SDG-aligned app with multi‑user role architecture. Improved my understanding of real‑world app architecture.</div>
+          <div class="btn-group"><a href="#" class="btn btn-github" style="pointer-events:none;opacity:0.7;">🔗 View on GitHub</a><span style="font-size:0.75rem;color:#14636e;">(repo private)</span></div>
+        </div>
+        <!-- Project 2 -->
+        <div class="card"><h3>MyKerja · Project 2</h3><span class="badge">Auth · GPS · QR · Firestore</span>
+          <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/VdXQAl5HH2s" allowfullscreen loading="lazy"></iframe></div>
+          <p><strong>Problem:</strong> Project 1 lacked role separation & authentication. This version adds login with role‑based UI, QR scanning, GPS location, and cloud sync.</p>
+          <div class="reflection">Learned advanced Android: authentication navigation, role‑based UI, Room, Firebase Firestore, REST API, GPS, and QR scanning. Understood how production apps manage users, roles, and hardware.</div>
+          <div class="btn-group"><a href="#" class="btn btn-github" style="pointer-events:none;opacity:0.7;">🔗 View on GitHub</a><span style="font-size:0.75rem;color:#14636e;">(repo private)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REFLECTION -->
+    <section id="reflection">
+      <h2 class="section-title">📝 Reflection & Learning Journey</h2>
+      <div style="background:white; border-radius:28px; padding:1.8rem 2rem; border:1px solid #bce0e0;">
+        <p>Throughout this Mobile Programming course, I gradually developed a deeper understanding of Android application development using Kotlin and Jetpack Compose. Starting from simple UI design, I progressed to implementing user interaction, Material Design, multi-screen navigation, ViewModel state management, and local database integration using Room.</p><br>
+        <p>The final project challenged me to integrate multiple technologies including Firebase Firestore, REST APIs, GPS location services, and QR/barcode scanning into a single application. Although I encountered debugging and compatibility issues, each challenge improved my problem-solving skills and strengthened my understanding of real-world mobile system architecture.</p><br>
+        <p>Overall, this course has strengthened both my technical and software engineering skills. It also encouraged me to design applications that solve real-world problems aligned with the United Nations Sustainable Development Goals (SDGs).</p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section-title">⚙️ Skills & Tech Stack</h2>
+      <div class="two-col">
+        <div style="background:white; border-radius:28px; padding:1.2rem 1.8rem; border:1px solid #bce0e0;">
+          <h4 style="color:#0d535f;">Programming</h4>
+          <div class="flex-wrap"><span class="skill-tag">Kotlin</span><span class="skill-tag">XML</span><span class="skill-tag">SQL</span></div>
+          <h4 style="color:#0d535f; margin-top:0.5rem;">Android</h4>
+          <div class="flex-wrap"><span class="skill-tag">Jetpack Compose</span><span class="skill-tag">Navigation Compose</span><span class="skill-tag">ViewModel</span><span class="skill-tag">Material 3</span></div>
+          <h4 style="color:#0d535f; margin-top:0.5rem;">DB & Backend</h4>
+          <div class="flex-wrap"><span class="skill-tag">Room</span><span class="skill-tag">Firestore</span><span class="skill-tag">Auth</span></div>
+        </div>
+        <div style="background:white; border-radius:28px; padding:1.2rem 1.8rem; border:1px solid #bce0e0;">
+          <h4 style="color:#0d535f;">Networking & Hardware</h4>
+          <div class="flex-wrap"><span class="skill-tag">REST API</span><span class="skill-tag">Retrofit</span><span class="skill-tag">GPS</span><span class="skill-tag">QR Scanner</span></div>
+          <h4 style="color:#0d535f; margin-top:0.5rem;">Tools & soft skills</h4>
+          <div class="flex-wrap"><span class="skill-tag">Android Studio</span><span class="skill-tag">Git/GitHub</span><span class="skill-tag">Gradle</span></div>
+          <p style="margin-top:0.8rem; font-size:0.9rem;">• Problem-solving · UI/UX design · Debugging · MVVM architecture</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section id="resources">
+      <h2 class="section-title">📚 Resources</h2>
+      <div style="background:white; border-radius:28px; padding:1.5rem 2rem; border:1px solid #bce0e0;">
+        <div style="display:flex; flex-wrap:wrap; gap:1.2rem 2rem;">
+          <div><h4 style="color:#0d535f; margin-bottom:0.3rem;">Libraries & Frameworks</h4>
+            <div class="flex-wrap"><span class="skill-tag">Jetpack Compose</span><span class="skill-tag">Navigation</span><span class="skill-tag">ViewModel</span><span class="skill-tag">Room</span><span class="skill-tag">Firestore</span><span class="skill-tag">Firebase Auth</span><span class="skill-tag">Material 3</span><span class="skill-tag">Kotlin Coroutines</span><span class="skill-tag">Retrofit</span><span class="skill-tag">Google Location</span><span class="skill-tag">ML Kit / QR</span></div>
+          </div>
+          <div><h4 style="color:#0d535f; margin-bottom:0.3rem;">Learning & Acknowledgement</h4>
+            <p>Android Developers · Kotlin Docs · Compose Codelabs · Firebase Docs · Material Design Guidelines</p>
+            <p style="margin-top:0.3rem; font-size:0.9rem; background:#e2f2f5; padding:0.4rem 1rem; border-radius:40px;">AI‑assisted (ChatGPT, Gemini) for debugging, documentation & structure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <strong>Nur Nabihah Binti Alwi</strong> · A210814 · Bachelor of Information Technology · UKM
+        <span>📅 2026 · e‑Portfolio for Mobile Programming (Dr Rimaniza)</span>
+        <span style="opacity:0.7; font-size:0.85rem;">🌱 MyKerja – SDG 1: No Poverty · built with Jetpack Compose</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
