@@ -321,6 +321,7 @@
             margin-bottom: 0;
         }
 
+        /* ===== BUTTONS ===== */
         .btn {
             display: inline-block;
             padding: 14px 25px;
@@ -368,6 +369,7 @@
             align-self: flex-start;
         }
 
+        /* ===== STUDENT PROFILE ===== */
         .student-profile {
             display: flex;
             gap: 25px;
@@ -376,7 +378,9 @@
             margin-bottom: 15px;
         }
 
-        .student-profile img {
+        /* ===== IMEJ & VIDEO: tiada border, bulatan ===== */
+        .student-profile img,
+        .student-profile video {
             width: 170px;
             height: 170px;
             border-radius: 50%;
@@ -392,6 +396,7 @@
             flex-direction: column;
         }
 
+        /* ===== CONTACT BUTTON (SAMA MACAM LEARN MORE) ===== */
         .contact-btn {
             display: inline-block;
             padding: 14px 25px;
@@ -411,6 +416,7 @@
             transform: translateY(-3px);
         }
 
+        /* ===== FOOTER ===== */
         footer {
             background: #372A76;
             color: white;
@@ -424,6 +430,7 @@
             margin-top: 10px;
         }
 
+        /* ===== BACK TO TOP ===== */
         #topBtn {
             position: fixed;
             bottom: 30px;
@@ -447,6 +454,7 @@
             transform: translateY(-4px);
         }
 
+        /* ===== REVEAL ANIMATION ===== */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -468,7 +476,7 @@
             .hero h1 {
                 font-size: 40px;
             }
-            /* ===== BUANG display:none; biar menu kelihatan ===== */
+            /* Menu tetap kelihatan pada mobile */
             .menu {
                 display: flex;
                 flex-wrap: wrap;
@@ -494,7 +502,8 @@
                 align-items: center;
                 text-align: center;
             }
-            .student-profile img {
+            .student-profile img,
+            .student-profile video {
                 width: 180px;
                 height: 180px;
             }
@@ -511,7 +520,6 @@
             .btn-group .btn-outline {
                 margin-left: 0;
             }
-            /* ===== Susun nav pada mobile ===== */
             nav {
                 flex-direction: column;
                 align-items: center;
@@ -533,7 +541,8 @@
             .hero-card {
                 padding: 25px;
             }
-            .student-profile img {
+            .student-profile img,
+            .student-profile video {
                 width: 150px;
                 height: 150px;
             }
@@ -613,17 +622,18 @@
             </div>
             <div class="grid">
 
-                <!-- CARD KIRI: STUDENT INFO -->
+                <!-- CARD KIRI: STUDENT INFO (video ganti gambar) -->
                 <div class="card">
                     <div>
                         <span class="badge">Student Information</span>
                         <div class="student-profile">
-                            <img src="images/nabihah.png" alt="Nur Nabihah">
+                            <!-- ===== VIDEO ===== -->
+                            <video src="images/nabihah.mp4" autoplay muted loop playsinline></video>
                             <div class="info">
                                 <h3>Nur Nabihah Binti Alwi</h3>
                                 <p><strong>Matric No:</strong> A210814</p>
                                 <p><strong>Programme:</strong> Bachelor of Information Technology</p>
-                                <p><strong>University:</strong> Universiti Kebangsaan Malaysia </p>
+                                <p><strong>University:</strong> Universiti Kebangsaan Malaysia</p>
                                 <p><strong>Instructor:</strong> Dr Rimaniza</p>
                             </div>
                         </div>
@@ -641,6 +651,7 @@
                             Firebase, REST API, GPS and QR technology.
                         </p>
                     </div>
+                    <!-- ===== CONTACT ME DI BAWAH SEKALI ===== -->
                     <a href="https://wa.me/60138783473" target="_blank" class="contact-btn">
                         Contact Me
                     </a>
